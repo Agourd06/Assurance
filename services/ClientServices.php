@@ -20,6 +20,8 @@ class ClientServices extends Database implements ClientServicesInterface{
         $result->bindparam(":adress", $adress);
         $result->bindparam(":Phone", $Phone);
         $result->execute();
+        $userid = $db->lastInsertId();
+        return $userid;
     }
 
 
@@ -37,6 +39,18 @@ public function ShowClient(){
     return $clients;
 }
 
+public function ShowfiltredClient($id){
+    $db = $this->connect();
+    $query = "SELECT client.userId, client.FullName FROM client
+    JOIN assurclient ON assurclient.userId = client.userId
+    WHERE assurclient.Assurance_ID = $id
+    ORDER BY userId DESC";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $fetching;
+}
 
     
     public function editingClient($id){
@@ -46,14 +60,14 @@ public function ShowClient(){
             $clientInfo = "SELECT * FROM client WHERE userId = $id";
             $getClient = $db->query($clientInfo);
             $result = $getClient->fetch(PDO::FETCH_ASSOC);
-        
+            $userId = $result["userId"];
             $fullname = $result["FullName"];
             $adress = $result["Adress"];
             $CIN = $result["CIN"];
             $phone = $result["Number"];
 
         
-            return [$fullname, $adress,$CIN, $phone];
+            return [$userId,$fullname, $adress,$CIN, $phone];
     
 }
 

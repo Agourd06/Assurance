@@ -16,12 +16,13 @@ Class Article{
 
 
 
-    public function __construct($Title,$Description,$DateArticle,$userId,$Assurance_ID){
+    public function __construct($Article_ID,$Title,$Description,$date,$userId){
         $this->Title= $Title;
         $this->Description = $Description ;
-        $this->DateArticle = $DateArticle;
         $this->userId = $userId ;
-        $this->Assurance_ID = $Assurance_ID;
+
+$this->DateArticle = $date;
+   $this->Article_ID = $Article_ID;
         
 
 
@@ -52,7 +53,7 @@ Class Article{
     public function setDateArticle($DateArticle){
         $this->DateArticle = $DateArticle;
     }
-    public function getuserId(){
+    public function getuserID(){
         return $this->userId;
     }
     public function getAssurance_ID(){

@@ -6,7 +6,7 @@ interface ClientServicesInterface{
     public function editingClient($id);
     public function UpdateClient(Client $client,$id);
     public function ShowClient();
-
+  public function  ShowfiltredClient($id);
 
 }
 ?>

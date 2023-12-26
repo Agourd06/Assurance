@@ -1,6 +1,7 @@
 <?php
 
 require_once("../controllers/clientDashboard.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -34,29 +35,41 @@ require_once("../controllers/clientDashboard.php");
             <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
                 <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                     <li>
-                        <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+                        <a href="index.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+                        <a href="client.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Clients</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+                        <a href="Assureure.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Assurances</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                        <a href="Article.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Articles</a>
                     </li>
+                    <li>
+                        <a href="claim.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Claims</a>
+                    </li>
+                    <li>
+                        <a href="prime.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Prime</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 
 
-    <div class="h-[10vh] w-[95%] m-auto flex items-center"><button type="button" id="adduser" class="text-white gap-[10px] bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add User
+    <div class="h-[15vh] w-[81%] m-auto flex items-center justify-between">
+    <span class="text-transparent bg-clip-text bg-gradient-to-r text-[50px] font-bold to-blue-800 from-sky-400">Clients</span>
+
+    <button type="button" id="adduser" class="text-white gap-[10px] bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Add Client
             <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
             </svg>
-        </button></div>
+        </button>
+
+    </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -147,7 +160,7 @@ require_once("../controllers/clientDashboard.php");
             if (isset($_SESSION['editedClientData'])) {
                 $clientData = $_SESSION['editedClientData'];
 
-                [$fullname, $adress, $CIN, $phone] = $clientData;
+                [$userId, $fullname, $adress, $CIN, $phone] = $clientData;
             ?>
                 <script>
                     document.getElementById("overlay").classList.remove("hidden");
@@ -179,46 +192,48 @@ require_once("../controllers/clientDashboard.php");
                         <div class="col-span-6 sm:col-span-3">
                             <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CIN
                             </label>
-                            <input type="text" name="CIN" id="last-name" value="<?= $CIN ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                            <input type="text" name="CIN" id="last-name" value="<?= $CIN ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="XX*****" required="">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adress</label>
-                            <input type="text" name="adress" id="adress" value="<?= $adress ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@company.com" required="">
+                            <input type="text" name="adress" id="adress" value="<?= $adress ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@exemple.com" required="">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Phone Number</label>
-                            <input type="number" name="phone" id="phone-number" value="<?= $phone ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+(212)34 5456 789" required="">
+                            <input type="number" name="phone" id="phone-number" value="<?= $phone ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+(212)64 5456 789" required="">
                         </div>
                         <div class="grid md:grid-cols-1 ">
-                <select name="bankid" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                    <option value="">Choses Bank</option>
-                    <?php
-                    foreach ($banks as $bank) : ?>
-                        <option value="<?php echo  $bank['bankId'] ?>"><?php echo $bank['bankName'] ?></option>
+                            <input type="hidden" name="userid" value="<?= $userId ?>">
+                            <?php if (isset($_SESSION['userId'])) {
+                            } else { ?>
+                                <select name="assurId" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                    <option class="text-center" value="">Assurances</option>
+                                    <?php foreach ($AffichAssur as $assurance) { ?>
+                                        <option value="<?php echo $assurance->getAssuranceId(); ?>"><?php echo $assurance->getAssuranceName(); ?></option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
 
-                    <?php endforeach; ?>
-
-
-
-                </select>
-            </div>
+                        </div>
 
 
                     </div>
                 </div>
+
+
                 <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <?php if (isset($_SESSION['userId']) ) {
+                    <?php if (isset($_SESSION['userId'])) {
                         $id = $_SESSION['userId'] ?>
                         <button type="submit" name="update" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Edit all
                         </button>
-                        
-                    <?php }else { ?>
+
+                    <?php } else { ?>
                         <button type="submit" name="addclient" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Add all
                         </button>
-                    <?php }?>
+                    <?php } ?>
 
                 </div>
 
@@ -226,36 +241,17 @@ require_once("../controllers/clientDashboard.php");
 
         </div>
     </div>
-    <script>
-        function toggleOverlay() {
-            var overlay = document.getElementById("overlay");
-            overlay.classList.toggle("hidden");
-        }
-
-        function handleFormSubmit(event) {
-
-        }
-
-        document.getElementById("adduser").addEventListener("click", toggleOverlay);
-
-
-        document.getElementById("remove").addEventListener("click", function(event) {
-            event.preventDefault();
-            toggleOverlay();
-        });
-
-        document.getElementById("overlay").addEventListener("click", function(event) {
-            if (event.target.id === "overlay") {
-                toggleOverlay();
-            }
-        });
-
-        document.getElementById("overlay-form").addEventListener("submit", handleFormSubmit);
-    </script>
-
+    <script src="js/main.js">
+      
+      </script>
 
 
 
 </body>
 
 </html>
+
+
+
+
+

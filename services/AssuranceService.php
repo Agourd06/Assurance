@@ -43,41 +43,38 @@ public function ShowAssurance(){
        
 
         $db = $this->connect();
-            $clientInfo = "SELECT * FROM client WHERE userId = $id";
-            $getClient = $db->query($clientInfo);
-            $result = $getClient->fetch(PDO::FETCH_ASSOC);
+            $AssuranceInfo = "SELECT * FROM assurance WHERE Assurance_ID  = $id";
+            $getAssurance = $db->query($AssuranceInfo);
+            $result = $getAssurance->fetch(PDO::FETCH_ASSOC);
         
-            $fullname = $result["FullName"];
-            $adress = $result["Adress"];
-            $CIN = $result["CIN"];
-            $phone = $result["Number"];
+            $logo = $result["Logo"];
+            $name = $result["Name"];
+         
 
         
-            return [$fullname, $adress,$CIN, $phone];
+            return [$name, $logo];
     
 }
 
 
     public function UpdateAssurance(assurance $assurance,$id){
         $db = $this->connect();
-        $FullName = $client->getusername();
-        $CIN = $client->getCIN();
-        $adress = $client->getadress();
-        $Phone = $client->getNumber();
-        $query  = "UPDATE client SET FullName=:FullName , CIN=:CIN , Adress=:adress, Number=:Phone WHERE userId = :id";
+        $name = $assurance->getAssuranceName();
+        $logo = $assurance->getlogo();
+      
+        $query  = "UPDATE assurance SET Name=:name , Logo=:logo  WHERE Assurance_ID = :id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->bindParam(":FullName", $FullName, PDO::PARAM_STR);
-        $stmt->bindParam(":adress", $adress, PDO::PARAM_STR);
-        $stmt->bindParam(":CIN", $CIN, PDO::PARAM_STR);
-        $stmt->bindParam(":Phone", $Phone, PDO::PARAM_STR);
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":logo", $logo, PDO::PARAM_STR);
+
         $stmt->execute();
 
     }
     public function DeleteAssurance($id){
         $db = $this->connect();
 
-        $query = "DELETE FROM client WHERE userId = :id";
+        $query = "DELETE FROM assurance WHERE Assurance_ID = :id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

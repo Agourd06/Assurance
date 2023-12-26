@@ -1,17 +1,20 @@
 <?php
 
 require_once("../services/ClientServices.php");
+require_once("../services/AssuranceService.php");
 require_once("../models/Client.php");
+require_once("../services/AssurClientService.php");
 
-
+    $asuurances = new AssuranceService();
+    $AffichAssur = $asuurances->ShowAssurance();
 //Show clients
         $clients = new ClientServices();
-        
     $affichages = $clients->ShowClient();
+        
    
+$assurcliant = new AssurClientService();
 
-
-    //Add Clients
+    //Add Clients 
 
     if(isset($_POST["addclient"])) {
     $fullname = $_POST["fullname"];
@@ -19,11 +22,14 @@ require_once("../models/Client.php");
     $adress = $_POST["adress"];
     $phone = $_POST["phone"];
     $userId = '';
-
+    $assuranceId=$_POST["assurId"];
     $client = new Client($userId,$fullname, $CIN, $adress, $phone);
+    $clienId = $clients->addClient($client);
 
-    $clients->addClient($client);
-header('location:../views/client.php');
+    $assurclient = new AssurClient($clienId,$assuranceId);
+    $assurcliant->addAssurofuser($assurclient);
+   
+header('location:../views/assureure.php');
     }
 
 //    Display client data for edit
