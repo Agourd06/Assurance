@@ -7,74 +7,172 @@
 
     <title>Document</title>
     <style>
-  .home {
-  margin: 0;
-  background: rgb(23, 1, 62);
-  text-align: center;
-  font-family: sans-serif;
-  color: #fefefe;
-}
-.container {
+  @mixin aspect-ratio($width, $height) {
   position: relative;
-  width: 320px;
-  /* margin: 100px auto 0 auto; */
-  perspective: 100px;
+    
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+    
+  > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+  }
+}
+
+// Styling
+
+section {
+    background: #F4F4F4;
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1044px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .carousel {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d; 
-  animation: rotate360 60s infinite forwards linear;
+    display: block;
+    text-align: left;
+    position: relative;
+    margin-bottom: 22px;
+    
+    > input {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        
+        &:nth-of-type(6):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -500%; }
+        &:nth-of-type(5):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -400%; }
+        &:nth-of-type(4):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -300%; }
+        &:nth-of-type(3):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -200%; }
+        &:nth-of-type(2):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -100%; }
+        &:nth-of-type(1):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: 0%; }
+        
+        &:nth-of-type(1):checked ~ .carousel__thumbnails li:nth-of-type(1) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+        &:nth-of-type(2):checked ~ .carousel__thumbnails li:nth-of-type(2) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+        &:nth-of-type(3):checked ~ .carousel__thumbnails li:nth-of-type(3) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+        &:nth-of-type(4):checked ~ .carousel__thumbnails li:nth-of-type(4) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+        &:nth-of-type(5):checked ~ .carousel__thumbnails li:nth-of-type(5) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+        &:nth-of-type(6):checked ~ .carousel__thumbnails li:nth-of-type(6) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
+    }
 }
-.carousel__face { 
-  position: absolute;
-  width: 320px;
-  height: 300px;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  background-size: cover;
-  box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.5);
-  display: flex;
+
+.carousel__slides {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    display: flex;
 }
 
-span {
-  margin: auto;
-  font-size: 2rem;
+.carousel__slide {
+    position: relative;
+    display: block;
+    flex: 1 0 100%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 300ms ease-out;
+    vertical-align: top;
+    box-sizing: border-box;
+    white-space: normal;
+    
+    figure {
+        display: flex;
+        margin: 0;
+    }
+    
+    div {
+        @include aspect-ratio(3, 2);
+        width: 100%;
+    }
+    
+    img {
+        display: block;
+        flex: 1 1 auto;
+        object-fit: cover;
+    }
+    
+    figcaption {
+        align-self: flex-end;
+        padding: 20px 20px 0 20px;
+        flex: 0 0 auto;
+        width: 25%;
+        min-width: 150px;
+    }
+    
+    .credit {
+        margin-top: 1rem;
+        color: rgba(0, 0, 0, 0.5);
+        display: block;        
+    }
+    
+    &.scrollable {
+        overflow-y: scroll;
+    }
 }
 
-
-.carousel__face:nth-child(1) {
-  background-image: url("images/pic1");
-  transform: rotateY(  0deg) translateZ(300px); }
-.carousel__face:nth-child(2) { 
-  background-image: url("https://images.pexels.com/photos/1258865/pexels-photo-1258865.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    transform: rotateY( 60deg) translateZ(300px); }
-.carousel__face:nth-child(3) {
-  background-image: url("https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  transform: rotateY( 120deg) translateZ(300px); }
-.carousel__face:nth-child(4) {
-  background-image: url("https://images.pexels.com/photos/1394841/pexels-photo-1394841.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  transform: rotateY(180deg) translateZ(300px); }
-.carousel__face:nth-child(5) { 
-  background-image: url("https://images.pexels.com/photos/969679/pexels-photo-969679.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
- transform: rotateY(240deg) translateZ(300px); }
-.carousel__face:nth-child(6) { 
-  background-image: url("https://images.pexels.com/photos/1834400/pexels-photo-1834400.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
- transform: rotateY(300deg) translateZ(300px); }
-
-
-
-
-@keyframes rotate360 {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(-360deg);
-  }
+.carousel__thumbnails {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    
+    margin: 0 -10px;
+    
+    .carousel__slides + & {
+        margin-top: 20px;
+    }
+    
+    li {        
+        flex: 1 1 auto;
+        max-width: calc((100% / 6) - 20px);  
+        margin: 0 10px;
+        transition: all 300ms ease-in-out;
+    }
+    
+    label {
+        display: block;
+        @include aspect-ratio(1,1);
+        
+                  
+        &:hover,
+        &:focus {
+            cursor: pointer;
+            
+            img {
+                box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.25);
+                transition: all 300ms ease-in-out;
+            }
+        }
+    }
+    
+    img {
+        display: block;
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
 }
 
     </style>
@@ -117,18 +215,105 @@ span {
         </div>
     </div>
 </nav>
-<section class="home">
-<div class="container">
-  <div class="carousel">
-    <div class="carousel__face"><span>This is something</span></div>
-    <div class="carousel__face"><span>Very special</span></div>
-    <div class="carousel__face"><span>Special is the key</span></div>
-    <div class="carousel__face"><span>For you</span></div>
-    <div class="carousel__face"><span>Just give it</span></div>
-    <div class="carousel__face"><span>A try</span></div>
+<section>
+  <div class="container">
+      <div class="carousel">
+          <input type="radio" name="slides" checked="checked" id="slide-1">
+          <input type="radio" name="slides" id="slide-2">
+          <input type="radio" name="slides" id="slide-3">
+          <input type="radio" name="slides" id="slide-4">
+          <input type="radio" name="slides" id="slide-5">
+          <input type="radio" name="slides" id="slide-6">
+          <ul class="carousel__slides">
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw]">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"  src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Tim Marshall</span>
+                      </figcaption>
+                  </figure>
+              </li>
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw]">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/605dabea2dd3b.jpg" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Christian Joudrey</span>                            
+                      </figcaption>
+                  </figure>
+              </li>
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw]">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/assurance-véhicule-lourd_v2.jpg" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Steve Carter</span>                            
+                      </figcaption>
+                  </figure>
+              </li>
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw] ">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Aleksandra Boguslawska</span>                            
+                      </figcaption>
+                  </figure>
+              </li>
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw]">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/qa-quality-assurance-quality-control-conceptual_31965-53386.avif" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Rosan Harmens</span>                            
+                      </figcaption>
+                  </figure>
+              </li>
+              <li class="carousel__slide">
+                  <figure>
+                      <div class="md:h-[55vh] md:w-[50vw]">
+                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="https://picsum.photos/id/1052/800/450" alt="">
+                      </div>
+                      <figcaption>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <span class="credit">Photo: Annie Spratt</span>                            
+                      </figcaption>
+                  </figure>
+              </li>
+          </ul>    
+          <ul class="carousel__thumbnails ">
+              <li>
+                  <label for="slide-1"><img src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg" alt=""></label>
+              </li>
+              <li>
+                  <label for="slide-2"><img src="images/605dabea2dd3b.jpg" alt=""></label>
+              </li>
+              <li>
+                  <label for="slide-3"><img src="images/assurance-véhicule-lourd_v2.jpg" alt=""></label>
+              </li>
+              <li>
+                  <label for="slide-4"><img src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt=""></label>
+              </li>
+              <li>
+                  <label for="slide-5"><img src="images/qa-quality-assurance-quality-control-conceptual_31965-53386.avif" alt=""></label>
+              </li>
+              <li>
+                  <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt=""></label>
+              </li>
+          </ul>
+      </div>
   </div>
-</div>
 </section>
-<input type="">
 </body>
 </html>

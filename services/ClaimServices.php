@@ -90,7 +90,19 @@ public function UpdateClaim(Claim $claim, $id)
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
     }
-
+    public function ShowClaimPrime(){
+        $db = $this->connect();
+        $query = "SELECT claim.*, article.* 
+        FROM claim
+        JOIN article ON article.Article_ID = claim.Article_ID
+         ORDER BY  Claim_ID DESC";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       
+        return $fetching;
+    }
+    
 
 }
 ?>

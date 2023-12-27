@@ -11,8 +11,8 @@ Class Prime{
     private $DatePrime;
     private $Claim_ID;
     
-    public function __construct($Amount,$DatePrime, $Claim_ID){
-    
+    public function __construct($Premium_ID,$Amount,$DatePrime, $Claim_ID){
+        $this->Premium_ID = $Premium_ID;
       $this->Amount = $Amount;
       $this->DatePrime = $DatePrime;
       $this->Claim_ID = $Claim_ID;

@@ -1,6 +1,6 @@
 <?php
 
-require_once("../controllers/clientDashboard.php");
+require_once("../controllers/PrimeDashBoard.php");
 
 ?>
 
@@ -10,20 +10,18 @@ require_once("../controllers/clientDashboard.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<!-- Add DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-<!-- Add DataTables JavaScript (jQuery is required) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    <title>Document</title>
+    <title>Claims</title>
 
-    
+
 </head>
 
 <body>
@@ -69,10 +67,10 @@ require_once("../controllers/clientDashboard.php");
 
 
     <div class="h-[15vh] w-[81%] m-auto flex items-center justify-between">
-    <span class="text-transparent bg-clip-text bg-gradient-to-r text-[50px] font-bold to-blue-800 from-sky-400">Clients</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r text-[50px] font-bold to-blue-800 from-sky-400">Primes</span>
 
-    <button type="button" id="adduser" class="text-white gap-[10px] bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add Client
+        <button type="button" id="adduser" class="text-white gap-[10px] bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Add Primes
             <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
             </svg>
@@ -81,21 +79,21 @@ require_once("../controllers/clientDashboard.php");
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-    <table id="clientTable" class="min-w-full bg-white text-center border border-gray-300 divide-y divide-gray-200">
+        <table id="clientTable" class="min-w-full bg-white text-center border border-gray-300 divide-y divide-gray-200">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
                     <th scope="col" class="px-6 py-3">
-                        FullName
+                        ID PRIME
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Adress
+                        Amounts
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        CIN
+                        Last Update DATE
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        PHONE
+                        Claim ID
                     </th>
 
                     <th scope="col" class="text-center px-6 py-3">
@@ -104,35 +102,35 @@ require_once("../controllers/clientDashboard.php");
 
                 </tr>
             </thead>
-           
-                <tbody>
+
+            <tbody>
                 <?php
-            foreach ($affichages as $affichage) :
+                foreach ($AffichePrime as $affichage) :
 
 
-            ?>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                ?>
+                    <tr class="bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="  text-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
 
                             <div class="px-1 py-4">
-                                <div class="text-base font-semibold"><?php echo $affichage->getusername(); ?></div>
+                                <div class="text-base font-semibold"><?php echo $affichage->getPremium_ID(); ?></div>
                             </div>
                         </th>
                         <td class="px-6 py-4">
-                            <?php echo $affichage->getadress(); ?> </td>
+                            <?php echo $affichage->getAmount(); ?> MAD </td>
                         <td class="px-6 py-4">
-                            <div class="font-normal text-gray-500"><?php echo $affichage->getCIN(); ?> </div>
+                            <div class="font-normal text-gray-500"><?php echo $affichage->getDatePrime(); ?> </div>
 
                         </td>
                         <td class="px-6 py-4">
-                            <div class="font-normal text-gray-500"><?php echo $affichage->getNumber(); ?></div>
+                            <div class="font-normal text-gray-500"><?php echo $affichage->getClaim_ID(); ?></div>
 
                         </td>
                         <td class="px-6 py-4 flex justify-center gap-[30px]">
-                            <form action="../controllers/clientDashboard.php" method="post">
-                                <input type="hidden" name="editing" value="<?php echo $affichage->getuserId(); ?>">
-                                <button type="submit" name="edit" id="edit" value="<?php echo $affichage->getuserId(); ?>"><svg class="h-8 w-8 text-blue-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <form action="../controllers/PrimeDashBoard.php" method="post">
+                                <input type="hidden" name="editing" value="<?php echo $affichage->getPremium_ID(); ?>">
+                                <button type="submit" name="edit" id="edit" value="<?php echo $affichage->getPremium_ID(); ?>"><svg class="h-8 w-8 text-blue-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" />
                                         <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
                                         <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
@@ -142,12 +140,12 @@ require_once("../controllers/clientDashboard.php");
                             </form>
 
 
-                            <form action="../controllers/clientDashboard.php" method="post"> <button type="submit" name="delete" value="<?php echo $affichage->getuserId(); ?>"> <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <form action="../controllers/ClaimDashBoard.php" method="post"> <button type="submit" name="delete" value="<?php echo $affichage->getPremium_ID(); ?>"> <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg></button></form>
 
 
-                            <form action="" method="post"> <button type="submit" name="view" value="<?php echo $affichage->getuserId(); ?>"> <svg class="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <form action="" method="post"> <button type="submit" name="view" value="<?php echo $affichage->getPremium_ID(); ?>"> <svg class="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                                         <circle cx="12" cy="12" r="3" />
                                     </svg></button></form>
@@ -155,12 +153,12 @@ require_once("../controllers/clientDashboard.php");
                         </td>
 
                     </tr>
-                    <?php
-            endforeach;
+                <?php
+                endforeach;
 
-            ?>
-                </tbody>
-            
+                ?>
+            </tbody>
+
 
         </table>
         <div id="overlay" class="hidden h-screen w-full fixed top-0 left-0 bg-black/10 flex justify-center items-center">
@@ -168,27 +166,27 @@ require_once("../controllers/clientDashboard.php");
             <?php
 
 
-            if (isset($_SESSION['editedClientData'])) {
-                $clientData = $_SESSION['editedClientData'];
+            if (isset($_SESSION['editedPrimeData'])) {
+                $Primedata = $_SESSION['editedPrimeData'];
 
-                [$userId, $fullname, $adress, $CIN, $phone] = $clientData;
+                [$Amount] = $Primedata;
             ?>
                 <script>
                     document.getElementById("overlay").classList.remove("hidden");
                 </script>
             <?php
-                unset($_SESSION['editedClientData']);
+                unset($_SESSION['editedPrimeData']);
             }
             ?>
 
-            <form action="../controllers/clientDashboard.php" method="post" id="overlay-form" class="w-[50%] bg-white rounded-lg shadow dark:bg-gray-700">
+            <form action="../controllers/PrimeDashBoard.php" method="post" id="overlay-form" class="w-[50%] bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <?php if (isset($_SESSION['ClaimId'])) {
-                        $id = $_SESSION['ClaimId'] ?>
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Update Client</h3>
+                <?php if (isset($_SESSION['PrimeId'])) {
+                        $id = $_SESSION['PrimeId'] ?>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Update Claim</h3>
 
                     <?php } else { ?>
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add Client</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add Claim</h3>
 
                     <?php } ?>
                     <button type="button" id="remove" class=" text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -202,31 +200,19 @@ require_once("../controllers/clientDashboard.php");
                 <div class="p-6 space-y-6">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                            <input type="text" name="fullname" id="first-name" value="<?= $fullname ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Full Name" required="">
+                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prime Amount</label>
+                            <input type="text" name="Amount" id="first-name" value="<?= $Amount ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="xxxxx MAD" required="">
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CIN
-                            </label>
-                            <input type="text" name="CIN" id="last-name" value="<?= $CIN ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="XX*****" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adress</label>
-                            <input type="text" name="adress" id="adress" value="<?= $adress ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@exemple.com" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Phone Number</label>
-                            <input type="number" name="phone" id="phone-number" value="<?= $phone ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+(212)64 5456 789" required="">
-                        </div>
+
+                     
+
                         <div class="grid md:grid-cols-1 ">
-                            <input type="hidden" name="userid" value="<?= $userId ?>">
-                            <?php if (isset($_SESSION['userId'])) {
+                            <?php if (isset($_SESSION['PrimeId'])) {
                             } else { ?>
-                                <select name="assurId" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                    <option class="text-center" value="">Assurances</option>
-                                    <?php foreach ($AffichAssur as $assurance) { ?>
-                                        <option value="<?php echo $assurance->getAssuranceId(); ?>"><?php echo $assurance->getAssuranceName(); ?></option>
+                                <select name="ClaimId" class="block w-[100px] py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                    <option class="text-center" value="">Claims</option>
+                                    <?php foreach ($AffichClaims as $Claim) { ?>
+                                        <option value="<?php echo $Claim["Claim_ID"] ?>">ID Claim : <?php echo $Claim["Claim_ID"] ?> / Article Title : <?php echo $Claim["Title"] ?> </option>
                                     <?php } ?>
                                 </select>
                             <?php } ?>
@@ -239,14 +225,14 @@ require_once("../controllers/clientDashboard.php");
 
 
                 <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <?php if (isset($_SESSION['userId'])) {
-                        $id = $_SESSION['userId'] ?>
+                    <?php if (isset($_SESSION['PrimeId'])) {
+                        $id = $_SESSION['PrimeId'] ?>
                         <button type="submit" name="update" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Edit all
                         </button>
 
                     <?php } else { ?>
-                        <button type="submit" name="addclient" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button type="submit" name="addprime" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Add all
                         </button>
                     <?php } ?>
@@ -258,21 +244,15 @@ require_once("../controllers/clientDashboard.php");
         </div>
     </div>
     <script src="js/main.js">
-      
-      </script>
 
-<script>
-    $(document).ready(function () {
-    $('#clientTable').DataTable();
-});
+    </script>
 
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#clientTable').DataTable();
+        });
+    </script>
 
 </body>
 
 </html>
-
-
-
-
-

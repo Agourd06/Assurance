@@ -4,7 +4,6 @@ require_once("../services/ClaimServices.php");
 require_once("../models/Claim.php");
 require_once("../services/ArticleService.php");
 require_once("../models/Article.php");
-require_once("../services/AssurClientService.php");
    
 
 //Show claim
