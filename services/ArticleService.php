@@ -2,8 +2,8 @@
 require_once("ArticleServiceInterface.php");
 require_once("../models/Article.php");
 require_once("../models/database.php");
-class ArticleService extends Database implements ArticleServiceInterface{
-
+class ArticleService  implements ArticleServiceInterface{
+    use Database;
     protected $db;
     public function addArticle(Article $article){
         $db = $this->connect();
@@ -12,13 +12,16 @@ class ArticleService extends Database implements ArticleServiceInterface{
         $Description = $article->getDescription();
         $userId = $article->getUserId();
         $Assurance_ID = $article->getAssurance_ID();
+        $Date = $article->getDateArticle();
     
-        $query = "INSERT INTO article (Title, Description, userId, Assurance_ID) VALUES (:Title, :Description, :userId, :Assurance_ID)";
+        $query = "INSERT INTO article (Title, Description, Date,userId, Assurance_ID) VALUES (:Title, :Description, :Date,:userId, :Assurance_ID)";
         
         try {
             $result = $db->prepare($query);
             $result->bindParam(":Title", $Title);
             $result->bindParam(":Description", $Description);
+            $result->bindParam(":Date", $Date);
+
             $result->bindParam(":userId", $userId);
             $result->bindParam(":Assurance_ID", $Assurance_ID);
             
@@ -41,13 +44,13 @@ public function ShowArticle(){
     $fetching = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $Article = array(); 
     foreach($fetching as $row){
-        $Article[] = new Article($row["Article_ID"], $row["Title"], $row["Description"], $row["Date"], $row["userId"]);
+        $Article[] = new Article($row["Article_ID"], $row["Title"],$row["Description"],$row["Date"], $row["userId"],$row['Assurance_ID']);
     }
     return $Article;
 }
 
 
-    
+
     public function editingArticle($id){
        
 
@@ -64,27 +67,35 @@ public function ShowArticle(){
     
 }
 
-    public function UpdateArticle(Article $article,$id){
+public function UpdateArticle(Article $article, $id)
+{
+    try {
         $db = $this->connect();
         $Title = $article->getTitle();
         $description = $article->getDescription();
-       
-        $query  = "UPDATE article SET Title=:Title , Description=:Description   WHERE article_ID = :id";
+    $Date = $article->getDateArticle();
+
+    $query = "UPDATE article SET Title=:Title, Description=:Description ,Date=:Date WHERE article_ID = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    $stmt->bindParam(":Title", $Title, PDO::PARAM_STR);
+    $stmt->bindParam(":Description", $description, PDO::PARAM_STR);
+    $stmt->bindParam("Date", $Date, PDO::PARAM_STR);
+    $stmt->execute();
+    
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+    public function DeleteArticle($id){
+        $db = $this->connect();
+
+        $query = "DELETE FROM article WHERE Article_ID = :id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->bindParam(":Title", $Title, PDO::PARAM_STR);
-        $stmt->bindParam(":Description", $description, PDO::PARAM_STR);
         $stmt->execute();
-
     }
-//     public function DeleteArticle($id){
-//         $db = $this->connect();
-
-//         $query = "DELETE FROM client WHERE userId = :id";
-//         $stmt = $db->prepare($query);
-//         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-//         $stmt->execute();
-//     }
 
 
 }

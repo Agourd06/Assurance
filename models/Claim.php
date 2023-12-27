@@ -9,11 +9,13 @@ Class Claim{
 
     private $Claim_ID;
     private $Descreption;
+
     private $DateClaim;
+    
     private $Article_ID;
     
-    public function __construct($Descreption,$DateClaim, $Article_ID){
-    
+    public function __construct($Claim_ID,$Descreption,$DateClaim, $Article_ID){
+    $this->Claim_ID = $Claim_ID;
       $this->Descreption = $Descreption;
       $this->DateClaim = $DateClaim;
       $this->Article_ID = $Article_ID;

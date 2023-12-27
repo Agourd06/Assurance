@@ -21,9 +21,11 @@ require_once("../services/AssurClientService.php");
     $Description = $_POST["Description"];
     $clientId = $_POST["clienId"];
     $Article_Id = '';
+    $Date = date("Y-m-d h:i:sa");
+
     $assuranceId = $assurclient->ShowAssurClient($clientId);
 foreach($assuranceId as $assId) {
-    $Article = new Article($Article_Id,$titre,$Description,$clientId,$assId);
+    $Article = new Article($Article_Id, $titre, $Description, $Date, $clientId, $assId);
 }
    $Articles->addArticle($Article);
  
@@ -46,7 +48,7 @@ if (isset($_POST["edit"]) && isset($_POST["editing"])) {
 
     if ($ArticleData) {
         $_SESSION['editedArticleData'] = $ArticleData;
-        
+        $_SESSION['ArticleId'] = $id;
         header('Location: ../views/article.php');
         exit;
     } else {
@@ -55,28 +57,29 @@ if (isset($_POST["edit"]) && isset($_POST["editing"])) {
     }
 }
 
-// edit clinent
+// edit Articles
 if(isset($_POST["update"])) {
-    $fullname = $_POST["fullname"];
-    $CIN = $_POST["CIN"];
-    $adress = $_POST["adress"];
-    $phone = $_POST["phone"];
-    $userId = $_POST["update"];
+    $Article_ID = $_POST["update"];
+    $titre = $_POST["Titre"];
+    $Description = $_POST["Description"];
+    $clientId = '';
+    $assuranceId = '';
+    $Date = date("Y-m-d h:i:sa");
 
-    $client = new Client($userId,$fullname, $CIN, $adress, $phone);
+    $Article = new Article($Article_ID, $titre, $Description, $Date,$clientId, $assuranceId);
 
-    $clients->UpdateClient($client,$userId);
-    unset($_SESSION["userId"]);
-header('location:../views/client.php');
+    $Articles->UpdateArticle($Article, $Article_ID);
+    unset($_SESSION['ArticleId']);
+    header('location:../views/article.php');
+}
 
-    }
 
-//     //delete client
-//     if(isset($_POST["delete"])) {
-//         $id = $_POST["delete"];
+    //delete client
+    if(isset($_POST["delete"])) {
+        $id = $_POST["delete"];
   
-//         $clients->DeleteClient($id);
-//     header('location:../views/client.php');
+        $Articles->DeleteArticle($id);
+    header('location:../views/article.php');
     
-//         }
+        }
 ?>

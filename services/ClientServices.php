@@ -2,7 +2,8 @@
 require_once("ClientServicesInterface.php");
 require_once("../models/Client.php");
 require_once("../models/database.php");
-class ClientServices extends Database implements ClientServicesInterface{
+class ClientServices implements ClientServicesInterface{
+    use Database;
 
     protected $db;
     public function addClient(Client $client){

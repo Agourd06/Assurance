@@ -3,8 +3,9 @@ require_once("../models/database.php");
 require_once("../models/AssurClient.php");
 require("AssurClientServiceInerface.php");
 
-class AssurClientService extends Database implements AssurClientServiceInerface
+class AssurClientService implements AssurClientServiceInerface
 {
+    use Database;
 
     protected $db;
 

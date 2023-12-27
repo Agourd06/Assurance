@@ -16,11 +16,11 @@ Class Article{
 
 
 
-    public function __construct($Article_ID,$Title,$Description,$date,$userId){
+    public function __construct($Article_ID,$Title,$Description,$date,$userId, $Assurance_ID){
         $this->Title= $Title;
         $this->Description = $Description ;
         $this->userId = $userId ;
-
+$this->Assurance_ID = $Assurance_ID ;
 $this->DateArticle = $date;
    $this->Article_ID = $Article_ID;
         

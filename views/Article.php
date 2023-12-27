@@ -10,11 +10,19 @@ require_once("../controllers/ArticleDashBoard.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 
 
     <title>Document</title>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 </head>
 
 <body>
@@ -64,7 +72,7 @@ require_once("../controllers/ArticleDashBoard.php");
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-        <table class="w-full text-center text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table id="dataTable" class="w-full text-center text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
@@ -75,7 +83,7 @@ require_once("../controllers/ArticleDashBoard.php");
                         Description
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Creation Date
+                        Last Update Date
                     </th>
                     <th scope="col" class="px-6 py-3">
                         ID client
@@ -86,13 +94,13 @@ require_once("../controllers/ArticleDashBoard.php");
                     </th>
 
                 </tr>
-            </thead>
+            </thead><tbody>
             <?php
             foreach ($Afficharticle as $affichage) :
 
 
             ?>
-                <tbody>
+                
                     <tr class="bg-white text-center border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                         <th scope="row" class=" px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
@@ -124,7 +132,7 @@ require_once("../controllers/ArticleDashBoard.php");
                             </form>
 
 
-                            <form action="../controllers/clientDashboard.php" method="post"> <button type="submit" name="delete" value="<?php echo $affichage->getArticle_ID(); ?>"> <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <form action="../controllers/ArticleDashBoard.php" method="post"> <button type="submit" name="delete" value="<?php echo $affichage->getArticle_ID(); ?>"> <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg></button></form>
 
@@ -137,18 +145,18 @@ require_once("../controllers/ArticleDashBoard.php");
                         </td>
 
                     </tr>
-                </tbody>
+               
             <?php
             endforeach;
 
             ?>
-
+ </tbody>
         </table>
         <div id="overlay" class="hidden h-screen w-full fixed top-0 left-0 bg-black/10 flex justify-center items-center">
             <?php
             if (isset($_SESSION['editedArticleData'])) {
                 $ArticletData = $_SESSION['editedArticleData'];
-                [$Title, $description] = $ArticletData;
+                [ $Title, $description] = $ArticletData;
             ?>
                 <script>
                     document.getElementById("overlay").classList.remove("hidden");
@@ -162,7 +170,7 @@ require_once("../controllers/ArticleDashBoard.php");
             <form action="../controllers/ArticleDashBoard.php" method="post" id="overlay-form" class="w-[50%] bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Add client
+                        Update Articles
                     </h3>
                     <button type="button" id="remove" class=" text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" pointer-events="none">
@@ -175,23 +183,24 @@ require_once("../controllers/ArticleDashBoard.php");
                 <div class="p-6 space-y-6">
                     <div class="grid flex flex-col gap-6">
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Logo</label>
-                            <input type="text" name="Logo" id="Logo" value="<?= $Title ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Logo" required="">
+                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                            <input type="text" name="Titre" id="Logo" value="<?= $Title ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required="">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name
+                            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description
                             </label>
-                            <input type="text" name="Name" id="Name" value="<?= $description ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required="">
+                            <input type="text" name="Description" id="Name" value="<?= $description ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type : ******....COLOR/Location : ******" required="">
                         </div>
 
 
                     </div>
                 </div>
-
+                
 
                 <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+           <?php     $Article_ID=     $_SESSION['ArticleId'];?>
 
-                    <button type="submit" name="update" value="<?= $id ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <button type="submit" name="update" value="<?= $Article_ID ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Edit all
                     </button>
 

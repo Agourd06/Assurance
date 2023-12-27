@@ -5,6 +5,7 @@ require_once("../services/ClientServices.php");
 
 require_once("../models/Assurance.php");
 session_start();
+
 if (isset($_POST["idAssur"])) {
     $id = $_POST["idAssur"];
     $_SESSION["idassur"] = $id;

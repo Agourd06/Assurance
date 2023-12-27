@@ -2,7 +2,8 @@
 require_once("AssuranceServiceinterface.php");
 require_once("../models/Assurance.php");
 require_once("../models/database.php");
-class AssuranceService extends Database implements AssuranceServiceinterface{
+class AssuranceService implements AssuranceServiceinterface{
+    use Database;
 
     protected $db;
     public function addAssurance(assurance $assurance){

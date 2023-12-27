@@ -2,7 +2,7 @@
 
 require_once("../config/config.php");
 
-class Database {
+trait Database {
     protected $db;
 
     public function connect() {
