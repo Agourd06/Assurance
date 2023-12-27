@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,313 +8,405 @@
 
     <title>Document</title>
     <style>
-  @mixin aspect-ratio($width, $height) {
-  position: relative;
-    
-  &:before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
-    
-  > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-  }
-}
+        @mixin aspect-ratio($width, $height) {
+            position: relative;
 
-// Styling
+            &:before {
+                display: block;
+                content: "";
+                width: 100%;
+                padding-top: ($height / $width) * 100%;
+            }
 
-section {
-    background: #F4F4F4;
-    padding: 50px 0;
-}
-
-.container {
-    max-width: 1044px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.carousel {
-    display: block;
-    text-align: left;
-    position: relative;
-    margin-bottom: 22px;
-    
-    > input {
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        height: 1px;
-        width: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        
-        &:nth-of-type(6):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -500%; }
-        &:nth-of-type(5):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -400%; }
-        &:nth-of-type(4):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -300%; }
-        &:nth-of-type(3):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -200%; }
-        &:nth-of-type(2):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: -100%; }
-        &:nth-of-type(1):checked ~ .carousel__slides .carousel__slide:first-of-type { margin-left: 0%; }
-        
-        &:nth-of-type(1):checked ~ .carousel__thumbnails li:nth-of-type(1) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-        &:nth-of-type(2):checked ~ .carousel__thumbnails li:nth-of-type(2) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-        &:nth-of-type(3):checked ~ .carousel__thumbnails li:nth-of-type(3) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-        &:nth-of-type(4):checked ~ .carousel__thumbnails li:nth-of-type(4) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-        &:nth-of-type(5):checked ~ .carousel__thumbnails li:nth-of-type(5) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-        &:nth-of-type(6):checked ~ .carousel__thumbnails li:nth-of-type(6) { box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5); }
-    }
-}
-
-.carousel__slides {
-    position: relative;
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    display: flex;
-}
-
-.carousel__slide {
-    position: relative;
-    display: block;
-    flex: 1 0 100%;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    transition: all 300ms ease-out;
-    vertical-align: top;
-    box-sizing: border-box;
-    white-space: normal;
-    
-    figure {
-        display: flex;
-        margin: 0;
-    }
-    
-    div {
-        @include aspect-ratio(3, 2);
-        width: 100%;
-    }
-    
-    img {
-        display: block;
-        flex: 1 1 auto;
-        object-fit: cover;
-    }
-    
-    figcaption {
-        align-self: flex-end;
-        padding: 20px 20px 0 20px;
-        flex: 0 0 auto;
-        width: 25%;
-        min-width: 150px;
-    }
-    
-    .credit {
-        margin-top: 1rem;
-        color: rgba(0, 0, 0, 0.5);
-        display: block;        
-    }
-    
-    &.scrollable {
-        overflow-y: scroll;
-    }
-}
-
-.carousel__thumbnails {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    
-    margin: 0 -10px;
-    
-    .carousel__slides + & {
-        margin-top: 20px;
-    }
-    
-    li {        
-        flex: 1 1 auto;
-        max-width: calc((100% / 6) - 20px);  
-        margin: 0 10px;
-        transition: all 300ms ease-in-out;
-    }
-    
-    label {
-        display: block;
-        @include aspect-ratio(1,1);
-        
-                  
-        &:hover,
-        &:focus {
-            cursor: pointer;
-            
-            img {
-                box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.25);
-                transition: all 300ms ease-in-out;
+            >img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
             }
         }
-    }
-    
-    img {
-        display: block;
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
-}
 
+
+        section {
+            background: #F4F4F4;
+            padding: 50px 0;
+        }
+
+        .container {
+            max-width: 1044px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .carousel {
+            display: block;
+            text-align: left;
+            position: relative;
+            margin-bottom: 22px;
+
+            >input {
+                clip: rect(1px, 1px, 1px, 1px);
+                clip-path: inset(50%);
+                height: 1px;
+                width: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+
+                &:nth-of-type(6):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -500%;
+                }
+
+                &:nth-of-type(5):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -400%;
+                }
+
+                &:nth-of-type(4):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -300%;
+                }
+
+                &:nth-of-type(3):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -200%;
+                }
+
+                &:nth-of-type(2):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -100%;
+                }
+
+                &:nth-of-type(1):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: 0%;
+                }
+
+                &:nth-of-type(1):checked~.carousel__thumbnails li:nth-of-type(1) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+
+                &:nth-of-type(2):checked~.carousel__thumbnails li:nth-of-type(2) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+
+                &:nth-of-type(3):checked~.carousel__thumbnails li:nth-of-type(3) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+
+                &:nth-of-type(4):checked~.carousel__thumbnails li:nth-of-type(4) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+
+                &:nth-of-type(5):checked~.carousel__thumbnails li:nth-of-type(5) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+
+                &:nth-of-type(6):checked~.carousel__thumbnails li:nth-of-type(6) {
+                    box-shadow: 0px 0px 0px 5px rgba(0, 0, 255, 0.5);
+                }
+            }
+        }
+
+        .carousel__slides {
+            position: relative;
+            z-index: 1;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        .carousel__slide {
+            position: relative;
+            display: block;
+            flex: 1 0 100%;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 300ms ease-out;
+            vertical-align: top;
+            box-sizing: border-box;
+            white-space: normal;
+
+            figure {
+                display: flex;
+                margin: 0;
+            }
+
+            div {
+                @include aspect-ratio(3, 2);
+                width: 100%;
+            }
+
+            img {
+                display: block;
+                flex: 1 1 auto;
+                object-fit: cover;
+            }
+
+            figcaption {
+                align-self: flex-end;
+                padding: 20px 20px 0 20px;
+                flex: 0 0 auto;
+                width: 25%;
+                min-width: 150px;
+            }
+
+            .credit {
+                margin-top: 1rem;
+                color: rgba(0, 0, 0, 0.5);
+                display: block;
+            }
+
+            &.scrollable {
+                overflow-y: scroll;
+            }
+        }
+
+        .carousel__thumbnails {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+
+            margin: 0 -10px;
+
+            .carousel__slides+& {
+                margin-top: 20px;
+            }
+
+            li {
+                flex: 1 1 auto;
+                max-width: calc((100% / 6) - 20px);
+                margin: 0 10px;
+                transition: all 300ms ease-in-out;
+            }
+
+            label {
+                display: block;
+                @include aspect-ratio(1, 1);
+
+
+                &:hover,
+                &:focus {
+                    cursor: pointer;
+
+                    img {
+                        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
+                        transition: all 300ms ease-in-out;
+                    }
+                }
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
     </style>
 </head>
-<body>
-  <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="images/Logoag.png" class="h-[60px]" alt="Agourd assurance" />
-            <!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ago assurance</span> -->
-        </a>
-        <button data-collapse-toggle="navbar-solid-bg" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-solid-bg" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-        </button>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-                <li>
-                    <a href="index.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
-                </li>
-                <li>
-                    <a href="client.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Clients</a>
-                </li>
-                <li>
-                    <a href="Assureure.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Assurances</a>
-                </li>
-                <li>
-                    <a href="Article.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Articles</a>
-                </li>
-                <li>
-                    <a href="claim.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Claims</a>
-                </li>
-                <li>
-                    <a href="prime.php" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Prime</a>
-                </li>
 
-            </ul>
+<body>
+    <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="images/Logoag.png" class="h-[60px]" alt="Agourd assurance" />
+                <!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ago assurance</span> -->
+            </a>
+            <button data-collapse-toggle="navbar-solid-bg" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-solid-bg" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+                <ul
+                    class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                    <li>
+                        <a href="index.html"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+                    </li>
+                    <li>
+                        <a href="client.php"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Clients</a>
+                    </li>
+                    <li>
+                        <a href="Assureure.php"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Assurances</a>
+                    </li>
+                    <li>
+                        <a href="Article.php"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Articles</a>
+                    </li>
+                    <li>
+                        <a href="claim.php"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Claims</a>
+                    </li>
+                    <li>
+                        <a href="prime.php"
+                            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Prime</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<section>
-  <div class="container">
-      <div class="carousel">
-          <input type="radio" name="slides" checked="checked" id="slide-1">
-          <input type="radio" name="slides" id="slide-2">
-          <input type="radio" name="slides" id="slide-3">
-          <input type="radio" name="slides" id="slide-4">
-          <input type="radio" name="slides" id="slide-5">
-          <input type="radio" name="slides" id="slide-6">
-          <ul class="carousel__slides">
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw]">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"  src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Tim Marshall</span>
-                      </figcaption>
-                  </figure>
-              </li>
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw]">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/605dabea2dd3b.jpg" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Christian Joudrey</span>                            
-                      </figcaption>
-                  </figure>
-              </li>
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw]">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/assurance-véhicule-lourd_v2.jpg" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Steve Carter</span>                            
-                      </figcaption>
-                  </figure>
-              </li>
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw] ">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Aleksandra Boguslawska</span>                            
-                      </figcaption>
-                  </figure>
-              </li>
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw]">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/qa-quality-assurance-quality-control-conceptual_31965-53386.avif" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Rosan Harmens</span>                            
-                      </figcaption>
-                  </figure>
-              </li>
-              <li class="carousel__slide">
-                  <figure>
-                      <div class="md:h-[55vh] md:w-[50vw]">
-                          <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="https://picsum.photos/id/1052/800/450" alt="">
-                      </div>
-                      <figcaption>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          <span class="credit">Photo: Annie Spratt</span>                            
-                      </figcaption>
-                  </figure>
-              </li>
-          </ul>    
-          <ul class="carousel__thumbnails ">
-              <li>
-                  <label for="slide-1"><img src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg" alt=""></label>
-              </li>
-              <li>
-                  <label for="slide-2"><img src="images/605dabea2dd3b.jpg" alt=""></label>
-              </li>
-              <li>
-                  <label for="slide-3"><img src="images/assurance-véhicule-lourd_v2.jpg" alt=""></label>
-              </li>
-              <li>
-                  <label for="slide-4"><img src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt=""></label>
-              </li>
-              <li>
-                  <label for="slide-5"><img src="images/qa-quality-assurance-quality-control-conceptual_31965-53386.avif" alt=""></label>
-              </li>
-              <li>
-                  <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt=""></label>
-              </li>
-          </ul>
-      </div>
-  </div>
-</section>
+    </nav>
+    <section>
+        <div class="container">
+            <div class="carousel">
+                <input type="radio" name="slides" checked="checked" id="slide-1">
+                <input type="radio" name="slides" id="slide-2">
+                <input type="radio" name="slides" id="slide-3">
+                <input type="radio" name="slides" id="slide-4">
+                <input type="radio" name="slides" id="slide-5">
+                <input type="radio" name="slides" id="slide-6">
+                <ul class="carousel__slides">
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw]">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"
+                                    src="images/Capture d'écran 2023-12-27 165611.png" alt="">
+                            </div>
+                            <figcaption>
+
+                                Agourd Assurance provides comprehensive insurance solutions tailored to your needs. From
+                                home and family coverage to specialized plans like car and airplane insurance, we
+                                prioritize your peace of mind. Our commitment is to safeguard your assets and
+                                well-being, offering reliable and personalized insurance options. Trust Agourd Assurance
+                                for protection that goes beyond expectations.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">AGOURD
+                                    Assurance</span>
+                            </figcaption>
+                        </figure>
+
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw]">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/605dabea2dd3b.jpg"
+                                    alt="">
+                            </div>
+                            <figcaption>
+
+                                Family insurance is a comprehensive protection plan covering health, life, and property
+                                to ensure the well-being and financial security of your loved ones. It provides peace of
+                                mind by offering a safety net for unforeseen circumstances.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">Family
+                                    insurance </span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw]">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"
+                                    src="images/assurance-véhicule-lourd_v2.jpg" alt="">
+                            </div>
+                            <figcaption>
+
+                                Truck insurance is specialized coverage tailored for commercial trucks, offering
+                                protection against accidents, damages, and liability risks. It ensures the financial
+                                security of truck owners and businesses while promoting safe and responsible operations
+                                on the road.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">Truck
+                                    insurance</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw] ">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"
+                                    src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt="">
+                            </div>
+                            <figcaption>
+
+                                Car insurance is essential coverage that safeguards your vehicle against accidents,
+                                theft, and other unforeseen events. It provides financial protection and peace of mind,
+                                ensuring you can navigate the roads with confidence.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">Car
+                                    insurance</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw]">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]" src="images/avion-assurance.jpg"
+                                    alt="">
+                            </div>
+                            <figcaption>
+
+                                Airplane insurance is specialized coverage designed to protect aircraft owners and
+                                operators against risks such as accidents, damage, and liability. This insurance ensures
+                                financial security and compliance with aviation regulations, offering peace of mind for
+                                those involved in the aviation industry.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">Airplane
+                                    insurance</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="carousel__slide">
+                        <figure>
+                            <div class="md:h-[55vh] md:w-[50vw]">
+                                <img class="md:h-[55vh] md:w-[50vw] rounded-[5px]"
+                                    src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg" alt="">
+                            </div>
+                            <figcaption>
+
+                                Home insurance provides crucial protection for your residence against risks such as
+                                fires, floods, and
+                                thefts. It not only covers the physical structure but also your personal belongings
+                                inside. In the event
+                                of a claim, it helps cover the costs of repair or replacement, ensuring your peace of
+                                mind.
+                                <span
+                                    class="credit text-transparent bg-clip-text bg-gradient-to-r text-[15px] font-bold to-blue-800 from-sky-400">Home
+                                    insurance</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+                <ul class="carousel__thumbnails ">
+                    <li>
+                        <label for="slide-6"><img src="images/Capture d'écran 2023-12-27 165611.png" alt=""></label>
+
+                    </li>
+                    <li>
+                        <label for="slide-2"><img src="images/605dabea2dd3b.jpg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-3"><img src="images/assurance-véhicule-lourd_v2.jpg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-4"><img
+                                src="images/criteres-avant-de-souscrire-une-assurance-auto-825x500.jpg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-5"><img src="images/avion-assurance.jpg" alt=""></label>
+                    </li>
+                    <li>
+                        <label for="slide-1"><img src="images/5f3ba106bd6592f7afe7da14_assurance emprunteur.jpg"
+                                alt=""></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
